@@ -33,7 +33,9 @@ if __name__ == "__main__":
     arp_client(ip_address)
 
 ```
-## OUPUT - ARP
+## OUTPUT - ARP
+![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/38b83253-d9d3-4858-8cde-d2e834232470)
+
 ## PROGRAM - RARP
 ```
 import socket
@@ -63,7 +65,9 @@ if __name__ == "__main__":
     arp_server()
 
 ```
-## OUPUT -RARP
+## OUTPUT -RARP
+![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/cf5b9670-2620-4cce-82c1-efd5185fc235)
+
 ## RESULT
 Thus, the python program for simulating ARP protocols using TCP was successfully 
 executed.
