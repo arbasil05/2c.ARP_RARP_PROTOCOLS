@@ -16,57 +16,42 @@ stored.
 4. Read the IP address which is send by the client.
 5. Map the IP address with its MAC address and return the MAC address to client.
 P
-## PROGRAM - ARP
+## PROGRAM:
+### client:
 ```
 import socket
-
-def arp_client(ip_address):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(('localhost', 12345))
-    s.send(ip_address.encode())
-    mac_address = s.recv(1024).decode()
-    print(f"MAC Address for IP {ip_address}: {mac_address}")
-    s.close()
-
-if __name__ == "__main__":
-    ip_address = input("Enter the IP address to resolve: ")
-    arp_client(ip_address)
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+address={"165.165.80.80":"6A:08:AA:C2","165.165.79.1":"8A:BC:E3:FA"};
+while True:
+ ip=c.recv(1024).decode()
+ try:
+ c.send(address[ip].encode())
+ except KeyError:
+ c.send("Not Found".encode()) 
 
 ```
-## OUTPUT - ARP
-![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/38b83253-d9d3-4858-8cde-d2e834232470)
-
-## PROGRAM - RARP
+### server:
 ```
 import socket
-
-def arp_server():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(('localhost', 12345))
-    s.listen(5)
-    print("ARP Server started...")
-    while True:
-        client_socket, addr = s.accept()
-        ip_address = client_socket.recv(1024).decode()
-        mac_address = get_mac_address(ip_address)
-        client_socket.send(mac_address.encode())
-        client_socket.close()
-
-def get_mac_address(ip_address):
-    # Simulated MAC address lookup table
-    mac_address_table = {
-        '192.168.1.1': '00:11:22:33:44:55',
-        '192.168.1.2': 'AA:BB:CC:DD:EE:FF',
-        '192.168.1.3': '12:34:56:78:90:AB'
-    }
-    return mac_address_table.get(ip_address, "MAC Address not found")
-
-if __name__ == "__main__":
-    arp_server()
-
+s=socket.socket()
+s.connect(('localhost',8000))
+while True:
+REG NO:
+ ip=input("Enter logical Address : ")
+ s.send(ip.encode())
+ print("MAC Address",s.recv(1024).decode())
 ```
-## OUTPUT -RARP
-![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/cf5b9670-2620-4cce-82c1-efd5185fc235)
+## OUTPUT:
+### client:
+![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/d2baf25e-a3f9-4056-8601-b5c94a8179b0)
+### server:
+![image](https://github.com/arbasil05/2c.ARP_RARP_PROTOCOLS/assets/144218037/dcb48c9a-cfdf-40fd-9f15-053aa7f54c29)
+
+
+
 
 ## RESULT
 Thus, the python program for simulating ARP protocols using TCP was successfully 
